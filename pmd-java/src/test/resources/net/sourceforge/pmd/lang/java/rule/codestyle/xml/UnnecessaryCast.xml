@@ -1176,4 +1176,27 @@ class Tester {
             ]]></code>
     </test-code>
 
+    <test-code>
+        <description>Cast in switch returning lambdas</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+            import java.util.function.Supplier;
+            public class Foo {
+                public void bar(int x) {
+                    foo(
+                        switch(x) {
+                            case 0 -> () -> (long) 1;
+                            case 1 -> () -> (long) 2;
+                            default -> throw new Error();
+                        }
+                    );
+                }
+
+                public void foo(Supplier<Long> sup) {
+                    // intentionally empty
+                }
+            }
+            ]]></code>
+    </test-code>
+
 </test-data>
